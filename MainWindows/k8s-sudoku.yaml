@@ -1,6 +1,5 @@
-# ==========================================
-# 1. SHARED CONFIGURATION (ConfigMap)
-# ==========================================
+# SHARED CONFIGURATION (ConfigMap)
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -18,9 +17,9 @@ data:
   DB_NAME: sudokudb
 
 ---
-# ==========================================
-# 2. DATABASE TIER (StatefulSet)
-# ==========================================
+
+# DATABASE TIER (StatefulSet)
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -67,9 +66,8 @@ spec:
           storage: 1Gi
 
 ---
-# ==========================================
-# 3. BACKEND TIER (Deployment)
-# ==========================================
+# BACKEND TIER (Deployment)
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -105,9 +103,8 @@ spec:
         - containerPort: 3000
 
 ---
-# ==========================================
-# 4. FRONTEND TIER (Deployment)
-# ==========================================
+#  FRONTEND TIER (Deployment)
+
 apiVersion: v1
 kind: Service
 metadata:
