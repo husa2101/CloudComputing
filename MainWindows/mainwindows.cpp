@@ -5,191 +5,6 @@
  */
 
 
-/*
-#include<QPushButton>
-#include<QLabel>
-#include<QFont>
-#include "mainwindows.h"
-#include<vector>
-#include<QAction>
-#include<QMenu>
-#include<QMenubar>
-#include<QStatusBar>
-#include<QApplication>
-#include<string>
-#include<random>
-#include <QPalette>
-#include <QColor>
-#include<QPixmap>
-#include<algorithm>
-#include<QLineEdit>
-#include<QVBoxLayout>
-#include<QMessageBox>
-#include<QSqlDatabase>
-#include<QSqlQuery>
-#include<QSqlError>
-
-
-MainWindows::MainWindows(QWidget *parent)
-    : QMainWindow{parent}
-{
-    // Load and apply the background image
-    QPixmap bkgnd(":/images/sudoku.jpg");
-    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
-    QPalette pal = palette();
-    pal.setBrush(QPalette::Window, QBrush(bkgnd));
-    this->setAutoFillBackground(true);
-    this->setPalette(pal);
-
-    // Setup help/instructions Menu Action
-    help = new QAction("instructions");
-    connect(help, &QAction::triggered, this, [=](){
-        QMessageBox::information(this, "Sudoku Game Rules",
-                                 "<b>The Row Rule:</b><br>"
-                                 "Every horizontal row must contain the numbers 1 through 9 exactly once.<br><br>"
-                                 "<b>The Column Rule:</b><br>"
-                                 "Every vertical column must contain the numbers 1 through 9 exactly once.<br><br>"
-                                 "<b>The Block Rule:</b><br>"
-                                 "Every 3x3 block must contain the numbers 1 through 9 exactly once.");
-    });
-
-    // Setup Quit Menu Action
-    quitAction = new QAction("Quit Application");
-    connect(quitAction, &QAction::triggered, this, [=](){
-        QApplication::quit();
-    });
-
-    // Add Actions to menu bar
-    QMenu *fileMenu0 = menuBar()->addMenu("quit");
-    fileMenu0->addAction(quitAction);
-
-    QMenu *fileMenu = menuBar()->addMenu("help");
-    fileMenu->addAction(help);
-
-    // UI element styling dimensions
-    int standardWidth = 250;
-    int standardHeight = 40;
-    QFont font("Times", 10, QFont::Bold);
-
-    // Heading label
-    QLabel *label = new QLabel("    Please Login", this);
-    label->setObjectName("labelStyle");
-    QString labelstyle = "QLabel#labelStyle { "
-                         "background-color: orange;"
-                         "border-radius: 5px;"
-                         "border: 1px solid gray;"
-                         " }";
-    label->setStyleSheet(labelstyle);
-    label->setFixedSize(standardWidth, standardHeight);
-    label->setFont(font);
-
-    // Username and Password input fields
-    QLineEdit *usernameInput = new QLineEdit(this);
-    usernameInput->setPlaceholderText("Enter username...");
-    usernameInput->setFixedSize(standardWidth, standardHeight);
-    usernameInput->setFont(font);
-
-    QLineEdit *passwordInput = new QLineEdit(this);
-    passwordInput->setPlaceholderText("Enter password...");
-    passwordInput->setEchoMode(QLineEdit::Password);
-    passwordInput->setFixedSize(standardWidth, standardHeight);
-    passwordInput->setFont(font);
-
-    QPushButton *button = new QPushButton("Submit!", this);
-    button->setFixedSize(standardWidth, standardHeight);
-    button->setFont(font);
-
-
-    std::shared_ptr<welcomeWidget>welcome = std::make_shared<welcomeWidget>();
-
-    // Central widget layout setup
-    QWidget *central = new QWidget(this);
-    QVBoxLayout *layout = new QVBoxLayout(central);
-    layout->addWidget(label, 0, Qt::AlignCenter);
-    layout->addWidget(usernameInput, 0, Qt::AlignCenter);
-    layout->addWidget(passwordInput, 0, Qt::AlignCenter);
-    layout->addWidget(button, 0, Qt::AlignCenter);
-    layout->addStretch();
-
-    setCentralWidget(central);
-
-    // lunch the sudoku game when the start button is clicked
-    connect(button, &QPushButton::clicked, this, [welcome](){
-        welcome->show();
-        welcome->resize(500, 500);
-    });
-
-    // Database initialization & login/registration logic on submit click
-    connect(button, &QPushButton::clicked, this, [=](){
-        QString username = usernameInput->text().trimmed();
-        QString password = passwordInput->text();
-
-        if(username.isEmpty() || password.isEmpty()) {
-            QMessageBox::warning(this, "Warning", "Username and password cannot be empty!");
-            return;
-        }
-
-        // Setup SQLite connection
-        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-        db.setDatabaseName("sudoku_users.db");
-
-        if (!db.open()) {
-            QMessageBox::critical(this, "Database Error", "Could not open database connection.");
-            return;
-        }
-
-        QSqlQuery query;
-        query.exec("CREATE TABLE IF NOT EXISTS Users ("
-                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                   "username TEXT UNIQUE, "
-                   "password TEXT)");
-
-        // Check if username exists in database
-        query.prepare("SELECT password FROM Users WHERE username = :username");
-        query.bindValue(":username", username);
-
-        if (query.exec() && query.next()) {
-            // Username found, verify password
-            QString storedPassword = query.value(0).toString();
-            if (storedPassword == password) {
-                QMessageBox::information(this, "Success", "Login successful! Launching Sudoku...");
-
-                // Launch the Sudoku game window
-                std::shared_ptr<welcomeWidget> welcome = std::make_shared<welcomeWidget>();
-                welcome->show();
-                welcome->resize(400, 400);
-                this->close(); // Close login window
-            } else {
-                QMessageBox::warning(this, "Login Failed", "Incorrect password. Please try again.");
-            }
-        } else {
-            // Username NOT found -> Prompt user to register
-            QMessageBox::StandardButton reply;
-            reply = QMessageBox::question(this, "User Not Found",
-                                          "Username not found in the database. Would you like to register as a new user?",
-                                          QMessageBox::Yes | QMessageBox::No);
-
-            if (reply == QMessageBox::Yes) {
-                QSqlQuery insertQuery;
-                insertQuery.prepare("INSERT INTO Users (username, password) VALUES (:username, :password)");
-                insertQuery.bindValue(":username", username);
-                insertQuery.bindValue(":password", password);
-
-                if (insertQuery.exec()) {
-                    QMessageBox::information(this, "Registered", "Registration successful! You are now logged in.");
-                    std::shared_ptr<welcomeWidget> welcome = std::make_shared<welcomeWidget>();
-                    welcome->show();
-                    welcome->resize(400, 400);
-                    this->close();
-                } else {
-                    QMessageBox::critical(this, "Error", "Could not register user to database.");
-                }
-            }
-        }
-    });
-}
-*/
-
 #include <QPushButton>
 #include <QLabel>
 #include <QFont>
@@ -797,7 +612,190 @@ int Sudoku::random()
 
 
 
+/*
+#include<QPushButton>
+#include<QLabel>
+#include<QFont>
+#include "mainwindows.h"
+#include<vector>
+#include<QAction>
+#include<QMenu>
+#include<QMenubar>
+#include<QStatusBar>
+#include<QApplication>
+#include<string>
+#include<random>
+#include <QPalette>
+#include <QColor>
+#include<QPixmap>
+#include<algorithm>
+#include<QLineEdit>
+#include<QVBoxLayout>
+#include<QMessageBox>
+#include<QSqlDatabase>
+#include<QSqlQuery>
+#include<QSqlError>
 
+
+MainWindows::MainWindows(QWidget *parent)
+    : QMainWindow{parent}
+{
+    // Load and apply the background image
+    QPixmap bkgnd(":/images/sudoku.jpg");
+    bkgnd = bkgnd.scaled(this->size(), Qt::IgnoreAspectRatio);
+    QPalette pal = palette();
+    pal.setBrush(QPalette::Window, QBrush(bkgnd));
+    this->setAutoFillBackground(true);
+    this->setPalette(pal);
+
+    // Setup help/instructions Menu Action
+    help = new QAction("instructions");
+    connect(help, &QAction::triggered, this, [=](){
+        QMessageBox::information(this, "Sudoku Game Rules",
+                                 "<b>The Row Rule:</b><br>"
+                                 "Every horizontal row must contain the numbers 1 through 9 exactly once.<br><br>"
+                                 "<b>The Column Rule:</b><br>"
+                                 "Every vertical column must contain the numbers 1 through 9 exactly once.<br><br>"
+                                 "<b>The Block Rule:</b><br>"
+                                 "Every 3x3 block must contain the numbers 1 through 9 exactly once.");
+    });
+
+    // Setup Quit Menu Action
+    quitAction = new QAction("Quit Application");
+    connect(quitAction, &QAction::triggered, this, [=](){
+        QApplication::quit();
+    });
+
+    // Add Actions to menu bar
+    QMenu *fileMenu0 = menuBar()->addMenu("quit");
+    fileMenu0->addAction(quitAction);
+
+    QMenu *fileMenu = menuBar()->addMenu("help");
+    fileMenu->addAction(help);
+
+    // UI element styling dimensions
+    int standardWidth = 250;
+    int standardHeight = 40;
+    QFont font("Times", 10, QFont::Bold);
+
+    // Heading label
+    QLabel *label = new QLabel("    Please Login", this);
+    label->setObjectName("labelStyle");
+    QString labelstyle = "QLabel#labelStyle { "
+                         "background-color: orange;"
+                         "border-radius: 5px;"
+                         "border: 1px solid gray;"
+                         " }";
+    label->setStyleSheet(labelstyle);
+    label->setFixedSize(standardWidth, standardHeight);
+    label->setFont(font);
+
+    // Username and Password input fields
+    QLineEdit *usernameInput = new QLineEdit(this);
+    usernameInput->setPlaceholderText("Enter username...");
+    usernameInput->setFixedSize(standardWidth, standardHeight);
+    usernameInput->setFont(font);
+
+    QLineEdit *passwordInput = new QLineEdit(this);
+    passwordInput->setPlaceholderText("Enter password...");
+    passwordInput->setEchoMode(QLineEdit::Password);
+    passwordInput->setFixedSize(standardWidth, standardHeight);
+    passwordInput->setFont(font);
+
+    QPushButton *button = new QPushButton("Submit!", this);
+    button->setFixedSize(standardWidth, standardHeight);
+    button->setFont(font);
+
+
+    std::shared_ptr<welcomeWidget>welcome = std::make_shared<welcomeWidget>();
+
+    // Central widget layout setup
+    QWidget *central = new QWidget(this);
+    QVBoxLayout *layout = new QVBoxLayout(central);
+    layout->addWidget(label, 0, Qt::AlignCenter);
+    layout->addWidget(usernameInput, 0, Qt::AlignCenter);
+    layout->addWidget(passwordInput, 0, Qt::AlignCenter);
+    layout->addWidget(button, 0, Qt::AlignCenter);
+    layout->addStretch();
+
+    setCentralWidget(central);
+
+    // lunch the sudoku game when the start button is clicked
+    connect(button, &QPushButton::clicked, this, [welcome](){
+        welcome->show();
+        welcome->resize(500, 500);
+    });
+
+    // Database initialization & login/registration logic on submit click
+    connect(button, &QPushButton::clicked, this, [=](){
+        QString username = usernameInput->text().trimmed();
+        QString password = passwordInput->text();
+
+        if(username.isEmpty() || password.isEmpty()) {
+            QMessageBox::warning(this, "Warning", "Username and password cannot be empty!");
+            return;
+        }
+
+        // Setup SQLite connection
+        QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+        db.setDatabaseName("sudoku_users.db");
+
+        if (!db.open()) {
+            QMessageBox::critical(this, "Database Error", "Could not open database connection.");
+            return;
+        }
+
+        QSqlQuery query;
+        query.exec("CREATE TABLE IF NOT EXISTS Users ("
+                   "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                   "username TEXT UNIQUE, "
+                   "password TEXT)");
+
+        // Check if username exists in database
+        query.prepare("SELECT password FROM Users WHERE username = :username");
+        query.bindValue(":username", username);
+
+        if (query.exec() && query.next()) {
+            // Username found, verify password
+            QString storedPassword = query.value(0).toString();
+            if (storedPassword == password) {
+                QMessageBox::information(this, "Success", "Login successful! Launching Sudoku...");
+
+                // Launch the Sudoku game window
+                std::shared_ptr<welcomeWidget> welcome = std::make_shared<welcomeWidget>();
+                welcome->show();
+                welcome->resize(400, 400);
+                this->close(); // Close login window
+            } else {
+                QMessageBox::warning(this, "Login Failed", "Incorrect password. Please try again.");
+            }
+        } else {
+            // Username NOT found -> Prompt user to register
+            QMessageBox::StandardButton reply;
+            reply = QMessageBox::question(this, "User Not Found",
+                                          "Username not found in the database. Would you like to register as a new user?",
+                                          QMessageBox::Yes | QMessageBox::No);
+
+            if (reply == QMessageBox::Yes) {
+                QSqlQuery insertQuery;
+                insertQuery.prepare("INSERT INTO Users (username, password) VALUES (:username, :password)");
+                insertQuery.bindValue(":username", username);
+                insertQuery.bindValue(":password", password);
+
+                if (insertQuery.exec()) {
+                    QMessageBox::information(this, "Registered", "Registration successful! You are now logged in.");
+                    std::shared_ptr<welcomeWidget> welcome = std::make_shared<welcomeWidget>();
+                    welcome->show();
+                    welcome->resize(400, 400);
+                    this->close();
+                } else {
+                    QMessageBox::critical(this, "Error", "Could not register user to database.");
+                }
+            }
+        }
+    });
+}
+*/
 
 
 /*void Sudoku::completeTheBoard(int row, int col)
