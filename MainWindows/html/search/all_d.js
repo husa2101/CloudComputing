@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['sizehint_0',['sizeHint',['../class_main_windows.html#a4cb91df3e89e9531dbcccfb07053e992',1,'MainWindows']]],
+  ['sizeof_5fdptr_1',['SIZEOF_DPTR',['../_desktop___qt__6__10__1___min_g_w__64__bit-_debug_2_main_windows__autogen_2moc__predefs_8h.html#addad5b57ed33bc5c79361574d9e03c06',1,'SIZEOF_DPTR:&#160;moc_predefs.h'],['../_desktop___qt__6__11__1___min_g_w__64__bit___debug_2_main_windows__autogen_2moc__predefs_8h.html#addad5b57ed33bc5c79361574d9e03c06',1,'SIZEOF_DPTR:&#160;moc_predefs.h']]],
+  ['stringify_2',['STRINGIFY',['../_desktop___qt__6__10__1___min_g_w__64__bit-_debug_2_c_make_files_23_830_85_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCXXCompilerId.cpp'],['../_desktop___qt__6__11__1___min_g_w__64__bit___debug_2_c_make_files_23_830_85_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#a43e1cad902b6477bec893cb6430bd6c8',1,'STRINGIFY:&#160;CMakeCXXCompilerId.cpp']]],
+  ['stringify_5fhelper_3',['STRINGIFY_HELPER',['../_desktop___qt__6__10__1___min_g_w__64__bit-_debug_2_c_make_files_23_830_85_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCXXCompilerId.cpp'],['../_desktop___qt__6__11__1___min_g_w__64__bit___debug_2_c_make_files_23_830_85_2_compiler_id_c_x_x_2_c_make_c_x_x_compiler_id_8cpp.html#a2ae9b72bb13abaabfcf2ee0ba7d3fa1d',1,'STRINGIFY_HELPER:&#160;CMakeCXXCompilerId.cpp']]],
+  ['sudoku_4',['Sudoku',['../class_sudoku.html',1,'Sudoku'],['../class_sudoku.html#a7e5d47d0ea752f57da843ff31e4b756c',1,'Sudoku::Sudoku()']]]
+];

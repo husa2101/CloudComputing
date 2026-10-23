@@ -1,0 +1,345 @@
+#include<QPushButton>
+#include<QLabel>
+#include<QFont>
+#include "mainwindows.h"
+#include<vector>
+#include<QMessageBox>
+#include<QAction>
+#include<QMenu>
+#include<QMenubar>
+#include<QStatusBar>
+#include<QApplication>
+#include<string>
+#include<random>
+#include<string>
+
+
+
+
+MainWindows::MainWindows(QWidget *parent)
+    : QMainWindow{parent}
+{
+
+    help = new QAction("instructions");
+    connect(help, &QAction::triggered, this, [=](){
+        QMessageBox::information(this, "Sudoku Game Rules",
+                                 "<b>The Row Rule:</b><br>"
+                                 "Every horizontal row must contain the numbers 1 through 9 exactly once. "
+                                 "You cannot have duplicate numbers in the same row.<br><br>"
+
+                                 "<b>The Column Rule:</b><br>"
+                                 "Every vertical column must contain the numbers 1 through 9 exactly once. "
+                                 "You cannot have duplicate numbers in the same column.<br><br>"
+
+                                 "<b>The Block Rule:</b><br>"
+                                 "Every 3x3 block (outlined by the thicker lines) must contain the numbers 1 through 9 exactly once. "
+                                 "You cannot have duplicate numbers inside the same 3x3 box."
+                                 );
+    });
+    quitAction = new QAction("Quit Application");
+    connect(quitAction, &QAction::triggered, this, [=](){
+        QApplication::quit();
+    } );
+
+    QMenu *fileMenu0 = menuBar()->addMenu("quit");
+    fileMenu0->addAction(quitAction);
+
+    QMenu *fileMenu = menuBar()->addMenu("help");
+    fileMenu->addAction(help);
+
+    int standardWidth = 250;
+    int standardHeight = 40;
+    QFont font("Times", 10, QFont::Bold);
+
+
+    QLabel *label = new QLabel("        Welcome to Sudoku", this);
+    label->setObjectName("labelStyle");
+    QString labelstyle = "QLabel#labelStyle { "
+                         "background-color: orange;"
+                         "border-radius: 5px;"
+                         "border: 1px gray;"
+                         " }";
+    label->setStyleSheet(labelstyle);
+    QPushButton * button = new QPushButton("Press to Start the Game!", this);
+
+    label->setFixedSize(standardWidth, standardHeight);
+    button->setFixedSize(standardWidth, standardHeight);
+
+    label->setFont(font);
+    button->setFont(font);
+
+    Sudoku *sudoku = new Sudoku();
+
+
+
+    QWidget *central = new QWidget(this);
+    QVBoxLayout *layout = new QVBoxLayout(central);
+    layout->addWidget(label, 0, Qt::AlignCenter);
+    layout->addWidget(button, 0, Qt::AlignCenter);
+
+    layout->addStretch();
+    setCentralWidget(central);
+
+    connect(button, &QPushButton::clicked, this, [sudoku](){
+        sudoku->show();
+        sudoku->resize(200, 200);
+    });
+
+}
+
+
+
+
+
+
+QSize MainWindows::sizeHint() const
+{
+    return QSize(500, 500);
+}
+
+MainWindows::~MainWindows()
+{
+    delete quitAction;
+    delete help;
+}
+
+
+Sudoku::Sudoku(QWidget *parent): QWidget(parent){
+
+    this->setWindowFlags(Qt::Window);
+    this->setWindowTitle("Sudoku Board");
+    QFont font("Times", 16, QFont::Bold);
+
+
+    QVBoxLayout * layout = new QVBoxLayout(this);
+    QLabel * label = new QLabel("Sudoku Game",this);
+
+    label->setFont(font);
+    label->setStyleSheet("QLabel {"
+                     "   border: 1px solid gray;"
+                     "   border-radius: 3px;"
+                     "background-color: yellow; "
+                     "}");
+    layout->addWidget(label, 0, Qt::AlignCenter);
+
+    QGridLayout * gridLyout = new QGridLayout();
+    gridLyout->setSpacing(0);
+
+    for(int row = 0; row < 9; ++row){
+        for(int column = 0; column < 9; ++column){
+
+            cell[row][column] = new QLineEdit(this);
+
+            cell[row][column]->setFixedSize(40, 40);
+
+            cell[row][column]->setAlignment(Qt::AlignCenter);
+
+            QFont cellFont("Arial", 10, QFont::Bold);
+            cell[row][column]->setFont(cellFont);
+            cell[row][column]->setMaxLength(1);
+
+            // --- NEW CODE: THE 3x3 GRID STYLING ---
+
+            // Start with a standard thin gray border for every cell
+            QString style = "QLineEdit { border: 1px solid #ccc; ";
+
+            // If it's the 3rd or 6th column, draw a thick black RIGHT border
+            if (column == 2 || column == 5) {
+                style += "border-right: 3px solid black; ";
+            }
+            // If it's the 3rd or 6th row, draw a thick black BOTTOM border
+            if (row == 2 || row == 5) {
+                style += "border-bottom: 3px solid black; ";
+            }
+
+            // (Optional) Draw thick borders around the absolute outside edges of the whole board
+            if (column == 0) style += "border-left: 3px solid black; ";
+            if (column == 8) style += "border-right: 3px solid black; ";
+            if (row == 0) style += "border-top: 3px solid black; ";
+            if (row == 8) style += "border-bottom: 3px solid black; ";
+
+            // Close the style string and apply it
+            style += "}";
+            cell[row][column]->setStyleSheet(style);
+
+            gridLyout->addWidget(cell[row][column], row, column);
+
+
+            connect(cell[row][column], &QLineEdit::textChanged,this, [=](const QString &userinput){
+                std::string input = userinput.toStdString();
+
+                if(!userinput.isEmpty()){
+
+                    if(!analys(input)){
+                         QMessageBox::information(this, "Game over", "<b>invalid input it has to be an integer</b>");
+                        cell[row][column]->clear();
+                    }
+                    else if(!isSafe(row, column, userinput )){
+                        QMessageBox::information(this, "", "<b>its not safe chose other integer:</b>");
+                        cell[row][column]->clear();
+                    }else if(complete()){
+                        QMessageBox::information(this, "Winner!", "<b>Congratulations, you completed the game!</b>");
+                    }
+                }
+            });
+        }
+    }
+
+    QVBoxLayout *buttonLayout = new QVBoxLayout();
+    QPushButton *btn = new QPushButton("Reset && start New game", this);
+    btn->setObjectName("btn");
+    btn->setFixedSize(200, 30);
+    //btn->setFont(font);
+    btn->setStyleSheet("QPushButton {"
+                       "border: 1px solid gray;"
+                       "border-radius: 10px;"
+                        "}");
+    buttonLayout->addWidget(btn, 0, Qt::AlignCenter);
+
+    layout->addLayout(gridLyout);
+    layout->addLayout(buttonLayout);
+   // addDefaultvalue();
+
+
+
+    connect(btn, &QPushButton::clicked, [=](){
+        generateNewGame();
+    });
+
+}
+
+
+
+
+
+
+bool Sudoku::analys(std::string &c)
+{
+    bool isInteger = true;
+    for(auto it: c){
+
+        if(!std::isdigit(static_cast<unsigned char>(it))){
+            isInteger = false;
+        }
+        break;
+
+    }
+
+    return isInteger;
+}
+
+bool Sudoku::isSafe(int r, int c,const QString &str)
+{
+
+    /* You are checking yourself!
+    Because you are running this code after the user types the number into the
+    box, the number is already sitting inside cell[r][c]
+    therefor You must tell your loops to skip the box the user just typed in. You do
+    this by making sure your loop index does not equal the target row or column.*/
+
+    for(int i = 0; i <= 8; ++i){
+        if(i != c && !cell[r][i]->text().isEmpty()){
+            if(cell[r][i]->text() == str){
+                return false;
+            }
+        }
+    }
+
+    for(int i = 0; i <= 8; ++i){
+        if(i != r && !cell[i][c]->text().isEmpty()){
+            if(cell[i][c]->text() == str){
+                return false;
+            }
+        }
+    }
+
+    int startRow = (r / 3) * 3;
+    int startCol = (c / 3) * 3;
+
+    for(int i = 0; i <= 2; ++i){
+        for(int j = 0; j <= 2; ++j){
+
+            int checkrow = startRow + i;
+            int checkcol = startCol + j;
+            if(checkrow != r && !cell[checkrow][checkcol]->text().isEmpty()){
+                if(cell[checkrow][checkcol]->text() == str){
+                    return false;
+                }
+            }
+        }
+    }
+
+    return true;
+
+}
+
+
+void Sudoku::generateNewGame()
+{
+    // 1. Clear the entire board first so you start fresh every time!
+    for (int row = 0; row < 9; ++row) {
+        for (int col = 0; col < 9; ++col) {
+            cell[row][col]->clear();
+            cell[row][col]->setReadOnly(false); // Unlock the boxes
+        }
+    }
+
+    // 2. Your list of starting coordinates
+    std::vector<std::pair<int, int> > initialCoords = {
+        {0, 0}, {0, 1}, {0, 4}, {1, 0}, {1, 3}, {1, 4}, {1, 5},
+        {2, 1}, {2, 2}, {2, 7}, {3, 0}, {3, 4}, {3, 8},
+        {4, 0}, {4, 3}, {4, 5}, {4, 8}, {5, 0}, {5, 4}, {5, 8},
+        {6, 1}, {6, 6}, {6, 7}, {7, 3}, {7, 4}, {7, 5}, {7, 8},
+        {8, 4}, {8, 7}, {8, 8}
+    };
+
+
+    // 4. Fill the board
+    for (auto it : initialCoords) {
+        int row = it.first;
+        int column = it.second;
+
+        bool numberPlaced = false;
+        int attempts = 0;
+
+        // Keep guessing random numbers until we find a safe one!
+        // (We limit attempts to 50 so the game doesn't freeze if it gets stuck)
+        while (!numberPlaced && attempts < 50) {
+
+            // Generate a random number from 1 to 9
+            int randomValue = random();
+            QString tx = QString::number(randomValue); // Faster string conversion
+
+            // REUSE your existing isSafe function!
+            if (isSafe(row, column, tx)) {
+                cell[row][column]->setText(tx);
+                cell[row][column]->setReadOnly(true); // Lock the starting numbers
+                numberPlaced = true; // This breaks the while loop so we can move to the next box
+            }
+            attempts++;
+        }
+    }
+}
+
+
+bool Sudoku::complete()
+{
+    for(int row = 0; row < 9; ++row){
+        for(int col = 0; col < 9; ++col){
+            if(cell[row][col]->text().isEmpty()){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+int Sudoku::random()
+{
+   static  std::mt19937 rng{ std::random_device{}() };
+    std::uniform_int_distribution<int> dist(1, 9);
+    int value = dist(rng);
+    return value;
+
+}
+

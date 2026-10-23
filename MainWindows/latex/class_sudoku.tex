@@ -1,0 +1,459 @@
+\doxysection{Sudoku Class Reference}
+\hypertarget{class_sudoku}{}\label{class_sudoku}\index{Sudoku@{Sudoku}}
+
+
+{\ttfamily \+\#include $<$mainwindows.\+h$>$}
+
+Inheritance diagram for Sudoku:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_sudoku}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_sudoku_a7e5d47d0ea752f57da843ff31e4b756c}{Sudoku}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+bool \doxymbox{\hyperlink{class_sudoku_a2a81308d5a9e91c2f44cdd61d5096344}{analys}} (std::\+string \&)
+\item 
+bool \doxymbox{\hyperlink{class_sudoku_a35f983dd9e80241653c6aa982cae7805}{is\+Safe}} (int r, int c, const QString \&str)
+\item 
+void \doxymbox{\hyperlink{class_sudoku_aea249f116e2a3ea6427860e47e7931d1}{generate\+New\+Game}} ()
+\item 
+bool \doxymbox{\hyperlink{class_sudoku_afcff53877ea9cc5fa057cd2b94820fe1}{complete}} ()
+\item 
+void \doxymbox{\hyperlink{class_sudoku_aceae5886cf318324aed196bdd4f28869}{complete\+The\+Board}} (int row, int col)
+\item 
+int \doxymbox{\hyperlink{class_sudoku_a925804e062e1b7ed20f05ece41924dcb}{random}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{class_sudoku_a53774921201e8229814da6bb13b5a217}{Cell\+Input\+Validator}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8h_source_l00062}{62}} of file \doxymbox{\hyperlink{mainwindows_8h_source}{mainwindows.\+h}}.
+
+
+
+\label{class_sudoku_doc-constructors}
+\Hypertarget{class_sudoku_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_sudoku_a7e5d47d0ea752f57da843ff31e4b756c}\index{Sudoku@{Sudoku}!Sudoku@{Sudoku}}
+\index{Sudoku@{Sudoku}!Sudoku@{Sudoku}}
+\doxysubsubsection{\texorpdfstring{Sudoku()}{Sudoku()}}
+{\footnotesize\ttfamily \label{class_sudoku_a7e5d47d0ea752f57da843ff31e4b756c} 
+Sudoku::\+\+Sudoku (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00146}{146}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ :\ QWidget(parent)\{}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{comment}{//\ background\ setup}}
+\DoxyCodeLine{00149\ \ \ \ \ QPixmap\ bkgnd\ (\textcolor{stringliteral}{"{}:/images/sudoku.jpg"{}});}
+\DoxyCodeLine{00150\ \ \ \ \ bkgnd\ =\ bkgnd.scaled(this-\/>size(),\ Qt::IgnoreAspectRatio);}
+\DoxyCodeLine{00151\ \ \ \ \ QPalette\ pal\ =\ QPalette();}
+\DoxyCodeLine{00152\ \ \ \ \ pal.setBrush(QPalette::Window,\ QBrush(bkgnd));}
+\DoxyCodeLine{00153\ \ \ \ \ this-\/>setAutoFillBackground(\textcolor{keyword}{true});}
+\DoxyCodeLine{00154\ \ \ \ \ this-\/>setPalette(pal);}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ this-\/>setWindowFlags(Qt::Window);}
+\DoxyCodeLine{00158\ \ \ \ \ this-\/>setWindowTitle(\textcolor{stringliteral}{"{}Sudoku\ Board"{}});}
+\DoxyCodeLine{00159\ \ \ \ \ QFont\ font(\textcolor{stringliteral}{"{}Times"{}},\ 16,\ QFont::Bold);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \ QVBoxLayout\ *\ layout\ =\ \textcolor{keyword}{new}\ QVBoxLayout(\textcolor{keyword}{this});}
+\DoxyCodeLine{00163\ \ \ \ \ QLabel\ *\ label\ =\ \textcolor{keyword}{new}\ QLabel(\textcolor{stringliteral}{"{}Sudoku\ Game"{}},\textcolor{keyword}{this});}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ label-\/>setFont(font);}
+\DoxyCodeLine{00166\ \ \ \ \ label-\/>setStyleSheet(\textcolor{stringliteral}{"{}QLabel\ \{"{}}}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ border:\ 1px\ solid\ gray;"{}}}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ border-\/radius:\ 10px;"{}}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}background-\/color:\ yellow;\ "{}}}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\}"{}});}
+\DoxyCodeLine{00171\ \ \ \ \ layout-\/>addWidget(label,\ 0,\ Qt::AlignCenter);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ QGridLayout\ *\ gridLyout\ =\ \textcolor{keyword}{new}\ QGridLayout();}
+\DoxyCodeLine{00174\ \ \ \ \ gridLyout-\/>setSpacing(0);}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{comment}{//\ Initialize\ the\ 9x9\ grid\ of\ QLineEdits}}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ 9;\ ++row)\{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ column\ =\ 0;\ column\ <\ 9;\ ++column)\{}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][column]\ =\ \textcolor{keyword}{new}\ QLineEdit(\textcolor{keyword}{this});}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][column]-\/>setFixedSize(40,\ 40);}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][column]-\/>setAlignment(Qt::AlignCenter);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ QFont\ cellFont(\textcolor{stringliteral}{"{}Arial"{}},\ 10,\ QFont::Bold);}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][column]-\/>setFont(cellFont);}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][column]-\/>setMaxLength(1);}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ QString\ style\ =\ \textcolor{stringliteral}{"{}QLineEdit\ \{\ border:\ 1px\ solid\ \#ccc;\ "{}};}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (column\ ==\ 2\ ||\ column\ ==\ 5)\ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ style\ +=\ \textcolor{stringliteral}{"{}border-\/right:\ 3px\ solid\ black;\ "{}};}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (row\ ==\ 2\ ||\ row\ ==\ 5)\ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ style\ +=\ \textcolor{stringliteral}{"{}border-\/bottom:\ 3px\ solid\ black;\ "{}};}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (column\ ==\ 0)\ style\ +=\ \textcolor{stringliteral}{"{}border-\/left:\ 3px\ solid\ black;\ "{}};}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (column\ ==\ 8)\ style\ +=\ \textcolor{stringliteral}{"{}border-\/right:\ 3px\ solid\ black;\ "{}};}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (row\ ==\ 0)\ style\ +=\ \textcolor{stringliteral}{"{}border-\/top:\ 3px\ solid\ black;\ "{}};}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (row\ ==\ 8)\ style\ +=\ \textcolor{stringliteral}{"{}border-\/bottom:\ 3px\ solid\ black;\ "{}};}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ style\ +=\ \textcolor{stringliteral}{"{}\}"{}};}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][column]-\/>setStyleSheet(style);}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ gridLyout-\/>addWidget(cell[row][column],\ row,\ column);}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ connect\ text\ change\ signal\ to\ validate\ unser\ input\ instantly}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_sudoku_a53774921201e8229814da6bb13b5a217}{CellInputValidator}}\ validator(\textcolor{keyword}{this},\ row,\ column);}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ connect(cell[row][column],\ \&QLineEdit::textChanged,\ \textcolor{keyword}{this},\ validator);}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00223\ \ \ \ \ \}}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{comment}{//\ setup\ reset/new\ game\ button}}
+\DoxyCodeLine{00226\ \ \ \ \ QVBoxLayout\ *buttonLayout\ =\ \textcolor{keyword}{new}\ QVBoxLayout();}
+\DoxyCodeLine{00227\ \ \ \ \ QPushButton\ *btn\ =\ \textcolor{keyword}{new}\ QPushButton(\textcolor{stringliteral}{"{}Reset\ \&\&\ start\ New\ game"{}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00228\ \ \ \ \ btn-\/>setObjectName(\textcolor{stringliteral}{"{}btn"{}});}
+\DoxyCodeLine{00229\ \ \ \ \ btn-\/>setFixedSize(200,\ 30);}
+\DoxyCodeLine{00230\ \ \ \ \ btn-\/>setFont(QFont(\textcolor{stringliteral}{"{}Arial"{}},\ 10,\ QFont::Bold));}
+\DoxyCodeLine{00231\ \ \ \ \ btn-\/>setStyleSheet(\textcolor{stringliteral}{"{}QPushButton\ \{"{}}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ background-\/color:\ \#f0f0f0;"{}}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ border:\ 1px\ solid\ \#999;"{}}}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ border-\/radius:\ 10px;"{}}}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ padding:\ 5px;"{}}}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\}"{}}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}QPushButton:hover\ \{"{}}}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ background-\/color:\ lightblue;"{}}\ \textcolor{comment}{//\ Färgen\ ändras\ när\ musen\ hovrar!}}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ border:\ 1px\ solid\ \#333;"{}}}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\}"{}});}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{comment}{//\ button\ that\ auto\ complete\ the\ game.}}
+\DoxyCodeLine{00244\ \ \ \ \ QPushButton\ *\ buttonCompleteTheGame\ =\ \textcolor{keyword}{new}\ QPushButton(\textcolor{stringliteral}{"{}Auto\ Complete\ The\ game"{}},\textcolor{keyword}{this});}
+\DoxyCodeLine{00245\ \ \ \ \ buttonCompleteTheGame-\/>setObjectName(\textcolor{stringliteral}{"{}btn"{}});}
+\DoxyCodeLine{00246\ \ \ \ \ buttonCompleteTheGame-\/>setFixedSize(200,\ 30);}
+\DoxyCodeLine{00247\ \ \ \ \ buttonCompleteTheGame-\/>setFont(QFont(\textcolor{stringliteral}{"{}Arial"{}},\ 10,\ QFont::Bold));}
+\DoxyCodeLine{00248\ \ \ \ \ buttonCompleteTheGame-\/>setStyleSheet(\textcolor{stringliteral}{"{}QPushButton\ \{"{}}}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ background-\/color:\ \#f0f0f0;"{}}}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ border:\ 1px\ solid\ \#999;"{}}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ border-\/radius:\ 10px;"{}}}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ padding:\ 5px;"{}}}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\}"{}}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}QPushButton:hover\ \{"{}}}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ background-\/color:\ lightblue;"{}}\ \textcolor{comment}{//\ Färgen\ ändras\ när\ musen\ hovrar!}}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \ border:\ 1px\ solid\ \#333;"{}}}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\}"{}});}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ buttonLayout-\/>addWidget(btn,\ 0,\ Qt::AlignCenter);}
+\DoxyCodeLine{00263\ \ \ \ \ buttonLayout-\/>addWidget(buttonCompleteTheGame,\ 0,\ Qt::AlignCenter);}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \ layout-\/>addLayout(gridLyout);}
+\DoxyCodeLine{00266\ \ \ \ \ layout-\/>addLayout(buttonLayout);}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \ connect(btn,\ \&QPushButton::clicked,\ [=]()\{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_sudoku_aea249f116e2a3ea6427860e47e7931d1}{generateNewGame}}();}
+\DoxyCodeLine{00273\ \ \ \ \ \});}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{comment}{//\ connect\ the\ button\ complete\ the\ game\ to\ the\ function\ that\ do\ the\ task\ but\ before\ that\ find\ the\ empty\ cell.}}
+\DoxyCodeLine{00276\ \ \ \ \ connect(buttonCompleteTheGame,\ \&QPushButton::clicked,\ [=]()\{}
+\DoxyCodeLine{00277\ }
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ 8;\ ++row)\{}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ 8;\ ++col)\{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(cell[row][col]-\/>text().isEmpty())\{}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_sudoku_aceae5886cf318324aed196bdd4f28869}{completeTheBoard}}(\ row,\ col);}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00286\ \ \ \ \ \});}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_sudoku_doc-func-members}
+\Hypertarget{class_sudoku_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_sudoku_a2a81308d5a9e91c2f44cdd61d5096344}\index{Sudoku@{Sudoku}!analys@{analys}}
+\index{analys@{analys}!Sudoku@{Sudoku}}
+\doxysubsubsection{\texorpdfstring{analys()}{analys()}}
+{\footnotesize\ttfamily \label{class_sudoku_a2a81308d5a9e91c2f44cdd61d5096344} 
+bool Sudoku::\+analys (\begin{DoxyParamCaption}\item[{std::\+string \&}]{c}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00297}{297}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00298\ \{}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \ \ \ \textcolor{keywordflow}{return}\ \ std::all\_of(c.begin(),\ c.end(),\ isDigitFunctor());}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00302\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_sudoku_afcff53877ea9cc5fa057cd2b94820fe1}\index{Sudoku@{Sudoku}!complete@{complete}}
+\index{complete@{complete}!Sudoku@{Sudoku}}
+\doxysubsubsection{\texorpdfstring{complete()}{complete()}}
+{\footnotesize\ttfamily \label{class_sudoku_afcff53877ea9cc5fa057cd2b94820fe1} 
+bool Sudoku::\+complete (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00423}{423}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00424\ \{\ \ \ \ }
+\DoxyCodeLine{00425\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ 9;\ ++row)\{}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ 9;\ ++col)\{\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(cell[row][col]-\/>text().isEmpty())\{}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00430\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00431\ \ \ \ \ \}}
+\DoxyCodeLine{00432\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00433\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_sudoku_aceae5886cf318324aed196bdd4f28869}\index{Sudoku@{Sudoku}!completeTheBoard@{completeTheBoard}}
+\index{completeTheBoard@{completeTheBoard}!Sudoku@{Sudoku}}
+\doxysubsubsection{\texorpdfstring{completeTheBoard()}{completeTheBoard()}}
+{\footnotesize\ttfamily \label{class_sudoku_aceae5886cf318324aed196bdd4f28869} 
+void Sudoku::\+complete\+The\+Board (\begin{DoxyParamCaption}\item[{int}]{row}{, }\item[{int}]{col}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00440}{440}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00441\ \{}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00443\ }
+\DoxyCodeLine{00444\ \ \ \ \ \textcolor{keywordtype}{bool}\ numberPlaced\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00445\ \ \ \ \ \textcolor{keywordtype}{int}\ attempts\ =\ 0;}
+\DoxyCodeLine{00446\ }
+\DoxyCodeLine{00447\ \ \ \ \ \textcolor{keywordflow}{while}(!numberPlaced\ \&\&\ attempts\ <\ 50)\{}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ randomInt\ =\ \doxymbox{\hyperlink{class_sudoku_a925804e062e1b7ed20f05ece41924dcb}{random}}();}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ QString\ textInt\ =\ QString::number(randomInt);}
+\DoxyCodeLine{00450\ }
+\DoxyCodeLine{00451\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(\doxymbox{\hyperlink{class_sudoku_a35f983dd9e80241653c6aa982cae7805}{isSafe}}(row,\ col,\ textInt))\{}
+\DoxyCodeLine{00452\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][col]-\/>setText(textInt);}
+\DoxyCodeLine{00453\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][col]-\/>setReadOnly(\textcolor{keyword}{true});}
+\DoxyCodeLine{00454\ \ \ \ \ \ \ \ \ \ \ \ \ numberPlaced\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00457\ \ \ \ \ \ \ \ \ attempts++;}
+\DoxyCodeLine{00458\ \ \ \ \ \}}
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00461\ }
+\DoxyCodeLine{00462\ }
+\DoxyCodeLine{00463\ }
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00465\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_sudoku_aea249f116e2a3ea6427860e47e7931d1}\index{Sudoku@{Sudoku}!generateNewGame@{generateNewGame}}
+\index{generateNewGame@{generateNewGame}!Sudoku@{Sudoku}}
+\doxysubsubsection{\texorpdfstring{generateNewGame()}{generateNewGame()}}
+{\footnotesize\ttfamily \label{class_sudoku_aea249f116e2a3ea6427860e47e7931d1} 
+void Sudoku::\+generate\+New\+Game (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00358}{358}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00359\ \{}
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{comment}{//\ 1.\ Clear\ the\ entire\ board\ first\ so\ you\ start\ fresh\ every\ time!}}
+\DoxyCodeLine{00361\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ 9;\ ++row)\ \{}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ col\ =\ 0;\ col\ <\ 9;\ ++col)\ \{}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][col]-\/>clear();}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][col]-\/>setReadOnly(\textcolor{keyword}{false});\ \textcolor{comment}{//\ Unlock\ the\ boxes}}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00366\ \ \ \ \ \}}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \ \ \ \ std::vector<cordinate<int>>initCordinate;}
+\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ row\ =\ 0;\ row\ <\ 9;\ ++row)\{}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ column\ =\ 0;\ column\ <\ 9;\ ++column\ )\{}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ cordinate<int>\ cord;}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ cord.\doxymbox{\hyperlink{structcordinate_a55ff8cefd2079fb8c1bbdbd3b760e473}{col}}\ =\ column;}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ cord.\doxymbox{\hyperlink{structcordinate_a56402df2a5e4605ec0c7fac7d8ee0daa}{row}}\ =\ row;}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ initCordinate.push\_back(cord);}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00377\ \ \ \ \ \}}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \ \ \ \ std::mt19937\_64\ rang(std::random\_device\{\}());}
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00381\ \ \ \ \ std::shuffle(initCordinate.begin(),\ initCordinate.end(),\ rang);}
+\DoxyCodeLine{00382\ }
+\DoxyCodeLine{00383\ \ \ \ \ \textcolor{keywordtype}{int}\ count\ =\ 0;}
+\DoxyCodeLine{00384\ }
+\DoxyCodeLine{00385\ \ \ \ \ \textcolor{comment}{//\ 4.\ Fill\ the\ board}}
+\DoxyCodeLine{00386\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ it\ :\ initCordinate)\ \{}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(count\ >=\ 30)\{}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ row\ =\ it.row;}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ column\ =\ it.col;}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ numberPlaced\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ attempts\ =\ 0;}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Keep\ guessing\ random\ numbers\ until\ we\ find\ a\ safe\ one!}}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (We\ limit\ attempts\ to\ 50\ so\ the\ game\ doesn't\ freeze\ if\ it\ gets\ stuck)}}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!numberPlaced\ \&\&\ attempts\ <\ 50)\ \{}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Generate\ a\ random\ number\ from\ 1\ to\ 9}}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ randomValue\ =\ \doxymbox{\hyperlink{class_sudoku_a925804e062e1b7ed20f05ece41924dcb}{random}}();}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ QString\ tx\ =\ QString::number(randomValue);\ \textcolor{comment}{//\ string\ conversion}}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ fills\ the\ board\ but\ before\ that\ check\ if\ is\ safe.}}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_sudoku_a35f983dd9e80241653c6aa982cae7805}{isSafe}}(row,\ column,\ tx))\ \{}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][column]-\/>setText(tx);}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cell[row][column]-\/>setReadOnly(\textcolor{keyword}{true});\ \textcolor{comment}{//\ Lock\ the\ starting\ numbers}}
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ numberPlaced\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ count++;}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00413\ \ \ \ \ \ \ \ \ \ \ \ \ attempts++;}
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00416\ \ \ \ \ \}}
+\DoxyCodeLine{00417\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_sudoku_a35f983dd9e80241653c6aa982cae7805}\index{Sudoku@{Sudoku}!isSafe@{isSafe}}
+\index{isSafe@{isSafe}!Sudoku@{Sudoku}}
+\doxysubsubsection{\texorpdfstring{isSafe()}{isSafe()}}
+{\footnotesize\ttfamily \label{class_sudoku_a35f983dd9e80241653c6aa982cae7805} 
+bool Sudoku::\+is\+Safe (\begin{DoxyParamCaption}\item[{int}]{r}{, }\item[{int}]{c}{, }\item[{const QString \&}]{str}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00311}{311}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00312\ \{}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <=\ 8;\ ++i)\{}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(i\ !=\ c\ \&\&\ !cell[r][i]-\/>text().isEmpty())\{}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(cell[r][i]-\/>text()\ ==\ str)\{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00321\ \ \ \ \ \}}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{comment}{//\ check\ column\ for\ conflicts\ (skipping\ the\ current\ target\ cell)}}
+\DoxyCodeLine{00324\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <=\ 8;\ ++i)\{}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(i\ !=\ r\ \&\&\ !cell[i][c]-\/>text().isEmpty())\{}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(cell[i][c]-\/>text()\ ==\ str)\{}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00330\ \ \ \ \ \}}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{comment}{//\ check\ 3x3\ block\ for\ conflicts}}
+\DoxyCodeLine{00333\ \ \ \ \ \textcolor{keywordtype}{int}\ startRow\ =\ (r\ /\ 3)\ *\ 3;}
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keywordtype}{int}\ startCol\ =\ (c\ /\ 3)\ *\ 3;}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00336\ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <=\ 2;\ ++i)\{}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int}\ j\ =\ 0;\ j\ <=\ 2;\ ++j)\{}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ checkrow\ =\ startRow\ +\ i;}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ checkcol\ =\ startCol\ +\ j;}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(checkrow\ !=\ r\ \&\&\ !cell[checkrow][checkcol]-\/>text().isEmpty())\{}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(cell[checkrow][checkcol]-\/>text()\ ==\ str)\{}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00347\ \ \ \ \ \}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_sudoku_a925804e062e1b7ed20f05ece41924dcb}\index{Sudoku@{Sudoku}!random@{random}}
+\index{random@{random}!Sudoku@{Sudoku}}
+\doxysubsubsection{\texorpdfstring{random()}{random()}}
+{\footnotesize\ttfamily \label{class_sudoku_a925804e062e1b7ed20f05ece41924dcb} 
+int Sudoku::\+random (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00471}{471}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00472\ \{}
+\DoxyCodeLine{00473\ \ \ \ \ \textcolor{keyword}{static}\ \ std::mt19937\ rng\{\ std::random\_device\{\}()\ \};}
+\DoxyCodeLine{00474\ \ \ \ \ std::uniform\_int\_distribution<int>\ dist(1,\ 9);}
+\DoxyCodeLine{00475\ \ \ \ \ \textcolor{keywordtype}{int}\ value\ =\ dist(rng);}
+\DoxyCodeLine{00476\ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00477\ }
+\DoxyCodeLine{00478\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_sudoku_doc-related-members}
+\Hypertarget{class_sudoku_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{class_sudoku_a53774921201e8229814da6bb13b5a217}\index{Sudoku@{Sudoku}!CellInputValidator@{CellInputValidator}}
+\index{CellInputValidator@{CellInputValidator}!Sudoku@{Sudoku}}
+\doxysubsubsection{\texorpdfstring{CellInputValidator}{CellInputValidator}}
+{\footnotesize\ttfamily \label{class_sudoku_a53774921201e8229814da6bb13b5a217} 
+friend struct \doxymbox{\hyperlink{struct_cell_input_validator}{Cell\+Input\+Validator}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8h_source_l00109}{109}} of file \doxymbox{\hyperlink{mainwindows_8h_source}{mainwindows.\+h}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{mainwindows_8h}{mainwindows.\+h}}\item 
+\doxymbox{\hyperlink{mainwindows_8cpp}{mainwindows.\+cpp}}\end{DoxyCompactItemize}

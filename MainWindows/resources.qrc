@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/sudoku.jpg</file>
+    </qresource>
+</RCC>

@@ -1,0 +1,181 @@
+\doxysection{Main\+Windows Class Reference}
+\hypertarget{class_main_windows}{}\label{class_main_windows}\index{MainWindows@{MainWindows}}
+
+
+{\ttfamily \+\#include $<$mainwindows.\+h$>$}
+
+Inheritance diagram for Main\+Windows:\+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_main_windows}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_main_windows_a1ad4e7f8ee82170df2db9bb13826dc3e}{Main\+Windows}} (QWidget \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+QSize \doxymbox{\hyperlink{class_main_windows_a4cb91df3e89e9531dbcccfb07053e992}{size\+Hint}} () const
+\item 
+\doxymbox{\hyperlink{class_main_windows_ab17b56acf9c065b7cb2df1ac45003bf7}{\texorpdfstring{$\sim$}{\string~}\+Main\+Windows}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8h_source_l00020}{20}} of file \doxymbox{\hyperlink{mainwindows_8h_source}{mainwindows.\+h}}.
+
+
+
+\label{class_main_windows_doc-constructors}
+\Hypertarget{class_main_windows_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_main_windows_a1ad4e7f8ee82170df2db9bb13826dc3e}\index{MainWindows@{MainWindows}!MainWindows@{MainWindows}}
+\index{MainWindows@{MainWindows}!MainWindows@{MainWindows}}
+\doxysubsubsection{\texorpdfstring{MainWindows()}{MainWindows()}}
+{\footnotesize\ttfamily \label{class_main_windows_a1ad4e7f8ee82170df2db9bb13826dc3e} 
+Main\+Windows::\+\+Main\+Windows (\begin{DoxyParamCaption}\item[{QWidget \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00031}{31}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00032\ \ \ \ \ :\ QMainWindow\{parent\}}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//this-\/>setStyleSheet("{}QMainWindow\ \{\ background-\/color:\ lightGray;\ \}"{});}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//load\ and\ apply\ thebackground\ image}}
+\DoxyCodeLine{00038\ \ \ \ QPixmap\ bkgnd(\textcolor{stringliteral}{"{}:/images/sudoku.jpg"{}});}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//Scale\ the\ image\ to\ fit\ your\ initial\ window\ size}}
+\DoxyCodeLine{00041\ \ \ \ \ \ bkgnd\ =\ bkgnd.scaled(this-\/>size(),\ Qt::IgnoreAspectRatio);}
+\DoxyCodeLine{00042\ \ \ \ \ QPalette\ pal\ =\ palette();}
+\DoxyCodeLine{00043\ \ \ \ \ pal.setBrush(QPalette::Window,\ QBrush(bkgnd));}
+\DoxyCodeLine{00044\ \ \ \ \ this-\/>setAutoFillBackground(\textcolor{keyword}{true});}
+\DoxyCodeLine{00045\ \ \ \ \ this-\/>setPalette(pal);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{comment}{//\ setup\ help/instructions\ Menu\ Action}}
+\DoxyCodeLine{00048\ \ \ \ \ help\ =\ \textcolor{keyword}{new}\ QAction(\textcolor{stringliteral}{"{}instructions"{}});}
+\DoxyCodeLine{00049\ \ \ \ \ connect(help,\ \&QAction::triggered,\ \textcolor{keyword}{this},\ [=]()\{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ QMessageBox::information(\textcolor{keyword}{this},\ \textcolor{stringliteral}{"{}Sudoku\ Game\ Rules"{}},}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}<b>The\ Row\ Rule:</b><br>"{}}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Every\ horizontal\ row\ must\ contain\ the\ numbers\ 1\ through\ 9\ exactly\ once.\ "{}}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}You\ cannot\ have\ duplicate\ numbers\ in\ the\ same\ row.<br><br>"{}}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}<b>The\ Column\ Rule:</b><br>"{}}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Every\ vertical\ column\ must\ contain\ the\ numbers\ 1\ through\ 9\ exactly\ once.\ "{}}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}You\ cannot\ have\ duplicate\ numbers\ in\ the\ same\ column.<br><br>"{}}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}<b>The\ Block\ Rule:</b><br>"{}}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Every\ 3x3\ block\ (outlined\ by\ the\ thicker\ lines)\ must\ contain\ the\ numbers\ 1\ through\ 9\ exactly\ once.\ "{}}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}You\ cannot\ have\ duplicate\ numbers\ inside\ the\ same\ 3x3\ box."{}}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{00063\ \ \ \ \ \});}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//setup\ Quit\ Menu\ Action}}
+\DoxyCodeLine{00066\ \ \ \ \ quitAction\ =\ \textcolor{keyword}{new}\ QAction(\textcolor{stringliteral}{"{}Quit\ Application"{}});}
+\DoxyCodeLine{00067\ \ \ \ \ connect(quitAction,\ \&QAction::triggered,\ \textcolor{keyword}{this},\ [=]()\{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ QApplication::quit();}
+\DoxyCodeLine{00069\ \ \ \ \ \}\ );}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//add\ Actions\ to\ menu\ bar}}
+\DoxyCodeLine{00072\ \ \ \ \ QMenu\ *fileMenu0\ =\ menuBar()-\/>addMenu(\textcolor{stringliteral}{"{}quit"{}});}
+\DoxyCodeLine{00073\ \ \ \ \ fileMenu0-\/>addAction(quitAction);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ QMenu\ *fileMenu\ =\ menuBar()-\/>addMenu(\textcolor{stringliteral}{"{}help"{}});}
+\DoxyCodeLine{00076\ \ \ \ \ fileMenu-\/>addAction(help);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//UI\ element\ styling\ and\ creation}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{int}\ standardWidth\ =\ 250;}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{int}\ standardHeight\ =\ 40;}
+\DoxyCodeLine{00081\ \ \ \ \ QFont\ font(\textcolor{stringliteral}{"{}Times"{}},\ 10,\ QFont::Bold);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ QLabel\ *label\ =\ \textcolor{keyword}{new}\ QLabel(\textcolor{stringliteral}{"{}\ \ \ \ \ \ \ \ Welcome\ to\ Sudoku"{}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00085\ \ \ \ \ label-\/>setObjectName(\textcolor{stringliteral}{"{}labelStyle"{}});}
+\DoxyCodeLine{00086\ \ \ \ \ QString\ labelstyle\ =\ \textcolor{stringliteral}{"{}QLabel\#labelStyle\ \{\ "{}}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}background-\/color:\ orange;"{}}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}border-\/radius:\ 5px;"{}}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}border:\ 1px\ gray;"{}}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \}"{}};}
+\DoxyCodeLine{00091\ \ \ \ \ label-\/>setStyleSheet(labelstyle);}
+\DoxyCodeLine{00092\ \ \ \ \ QPushButton\ *\ button\ =\ \textcolor{keyword}{new}\ QPushButton(\textcolor{stringliteral}{"{}Press\ to\ Start\ the\ Game!"{}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ label-\/>setFixedSize(standardWidth,\ standardHeight);}
+\DoxyCodeLine{00095\ \ \ \ \ button-\/>setFixedSize(standardWidth,\ standardHeight);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ label-\/>setFont(font);}
+\DoxyCodeLine{00098\ \ \ \ \ button-\/>setFont(font);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//smart\ pekare}}
+\DoxyCodeLine{00101\ \ \ \ \ std::shared\_ptr<Sudoku>sudoku\ =\ std::make\_shared<Sudoku>();}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{comment}{//central\ widget\ layout\ setup}}
+\DoxyCodeLine{00105\ \ \ \ \ QWidget\ *central\ =\ \textcolor{keyword}{new}\ QWidget(\textcolor{keyword}{this});}
+\DoxyCodeLine{00106\ \ \ \ \ QVBoxLayout\ *layout\ =\ \textcolor{keyword}{new}\ QVBoxLayout(central);}
+\DoxyCodeLine{00107\ \ \ \ \ layout-\/>addWidget(label,\ 0,\ Qt::AlignCenter);}
+\DoxyCodeLine{00108\ \ \ \ \ layout-\/>addWidget(button,\ 0,\ Qt::AlignCenter);}
+\DoxyCodeLine{00109\ \ \ \ \ layout-\/>addStretch();}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ setCentralWidget(central);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ lunch\ the\ sudoku\ game\ when\ the\ start\ button\ is\ clicked}}
+\DoxyCodeLine{00114\ \ \ \ \ connect(button,\ \&QPushButton::clicked,\ \textcolor{keyword}{this},\ [sudoku]()\{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ sudoku-\/>show();}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ sudoku-\/>resize(200,\ 200);}
+\DoxyCodeLine{00117\ \ \ \ \ \});}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \}}
+
+\end{DoxyCode}
+\Hypertarget{class_main_windows_ab17b56acf9c065b7cb2df1ac45003bf7}\index{MainWindows@{MainWindows}!````~MainWindows@{\texorpdfstring{$\sim$}{\string~}MainWindows}}
+\index{````~MainWindows@{\texorpdfstring{$\sim$}{\string~}MainWindows}!MainWindows@{MainWindows}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MainWindows()}{\string~MainWindows()}}
+{\footnotesize\ttfamily \label{class_main_windows_ab17b56acf9c065b7cb2df1ac45003bf7} 
+Main\+Windows::\+\texorpdfstring{$\sim$}{\string~}\+Main\+Windows (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00135}{135}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00136\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{delete}\ quitAction;}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keyword}{delete}\ help;}
+\DoxyCodeLine{00139\ \}}
+
+\end{DoxyCode}
+
+
+\label{class_main_windows_doc-func-members}
+\Hypertarget{class_main_windows_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_main_windows_a4cb91df3e89e9531dbcccfb07053e992}\index{MainWindows@{MainWindows}!sizeHint@{sizeHint}}
+\index{sizeHint@{sizeHint}!MainWindows@{MainWindows}}
+\doxysubsubsection{\texorpdfstring{sizeHint()}{sizeHint()}}
+{\footnotesize\ttfamily \label{class_main_windows_a4cb91df3e89e9531dbcccfb07053e992} 
+QSize Main\+Windows::\+size\+Hint (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8cpp_source_l00127}{127}} of file \doxymbox{\hyperlink{mainwindows_8cpp_source}{mainwindows.\+cpp}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00128\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordflow}{return}\ QSize(500,\ 500);}
+\DoxyCodeLine{00130\ \}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{mainwindows_8h}{mainwindows.\+h}}\item 
+\doxymbox{\hyperlink{mainwindows_8cpp}{mainwindows.\+cpp}}\end{DoxyCompactItemize}

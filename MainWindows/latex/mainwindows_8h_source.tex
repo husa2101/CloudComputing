@@ -1,0 +1,201 @@
+\doxysection{mainwindows.\+h}
+\hypertarget{mainwindows_8h_source}{}\label{mainwindows_8h_source}\doxymbox{\hyperlink{mainwindows_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00001}00001\ \textcolor{preprocessor}{\#ifndef\ MAINWINDOWS\_H}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00002}00002\ \textcolor{preprocessor}{\#define\ MAINWINDOWS\_H}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00004}00004\ \textcolor{preprocessor}{\#include\ <QMainWindow>}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00005}00005\ \textcolor{preprocessor}{\#include<QLineEdit>}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00006}00006\ \textcolor{preprocessor}{\#include<QLabel>}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00007}00007\ \textcolor{preprocessor}{\#include\ <QVBoxLayout>}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00008}00008\ \textcolor{preprocessor}{\#include<QGridLayout>}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00009}00009\ \textcolor{preprocessor}{\#include<string>}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00010}00010\ \textcolor{preprocessor}{\#include<QMessageBox>}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00012}00012\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00015}00015\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00016}00016\ \textcolor{comment}{\ *\ \&brief\ the\ MainWindows\ class}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00017}00017\ \textcolor{comment}{\ *\ Represent\ the\ main\ application\ window\ that\ houses\ the\ over\ all\ UI,}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00018}00018\ \textcolor{comment}{\ *\ such\ as\ menus,\ toolbars,\ and\ the\ central\ Sundoku\ widget}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00019}00019\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00020}\doxymbox{\hyperlink{class_main_windows}{00020}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_main_windows_a1ad4e7f8ee82170df2db9bb13826dc3e}{MainWindows}}\ :\ \textcolor{keyword}{public}\ QMainWindow}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00022}00022\ \ \ \ \ Q\_OBJECT}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00023}00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00024}00024\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00025}00025\ \textcolor{comment}{\ \ \ \ \ *\ \&brief\ Constructor\ for\ the\ MainWindows}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00026}00026\ \textcolor{comment}{\ \ \ \ \ *\ \&pram\ parent\ widget\ which\ has\ a\ vlaue\ nullptr\ which\ indicate\ top-\/level\ windows}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00027}00027\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00028}00028\ \ \ \ \ \doxymbox{\hyperlink{class_main_windows_a1ad4e7f8ee82170df2db9bb13826dc3e}{MainWindows}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00031}00031\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00032}00032\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00033}00033\ \textcolor{comment}{\ \ \ \ \ *\ \&brief\ used\ to\ manage\ the\ main\ window\ on\ startup}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00034}00034\ \textcolor{comment}{\ \ \ \ \ *\ \&return\ a\ QSize\ object\ representing\ the\ ideal\ width\ and\ height}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00035}00035\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00036}00036\ \ \ \ \ QSize\ \doxymbox{\hyperlink{class_main_windows_a4cb91df3e89e9531dbcccfb07053e992}{sizeHint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00038}00038\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00039}00039\ \textcolor{comment}{\ \ \ \ \ *\ \&brief\ Destructor\ to\ clean\ up\ dynamically\ allocated\ resources.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00040}00040\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00041}00041\ \ \ \ \ \doxymbox{\hyperlink{class_main_windows_ab17b56acf9c065b7cb2df1ac45003bf7}{\string~MainWindows}}();}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00045}00045\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00046}00046\ \ \ \ \ \textcolor{comment}{//\ menu\ actions\ action\ to\ exit\ the\ application}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00047}00047\ \ \ \ \ QAction\ *quitAction;}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//action\ to\ display\ game\ rules\ or\ about\ info}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00049}00049\ \ \ \ \ QAction\ *help;}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00051}00051\ \};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00056}00056\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00057}00057\ \textcolor{comment}{\ *\ @brief\ the\ sudoku\ class}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00058}00058\ \textcolor{comment}{\ *\ a\ constum\ QWidget\ that\ contains\ teh\ 9x9\ sudoku\ grid\ and\ handles\ all}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00059}00059\ \textcolor{comment}{\ *\ the\ game\ logic,\ user\ input\ validation,\ and\ puzzle\ generation.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00060}00060\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00061}00061\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00062}\doxymbox{\hyperlink{class_sudoku}{00062}}\ \textcolor{keyword}{class\ }\doxymbox{\hyperlink{class_sudoku_a7e5d47d0ea752f57da843ff31e4b756c}{Sudoku}}:\ \textcolor{keyword}{public}\ QWidget\ \{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00063}00063\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00064}00064\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00065}00065\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Constructor\ to\ imitialize\ the\ game\ board\ and\ UI\ layout}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00066}00066\ \textcolor{comment}{\ \ \ \ \ *\ @param\ parent\ The\ parent\ widget}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00067}00067\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00068}00068\ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{class_sudoku_a7e5d47d0ea752f57da843ff31e4b756c}{Sudoku}}(QWidget\ *parent\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00071}00071\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00072}00072\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Analys\ the\ user's\ input\ and\ return\ true\ if\ it\ is\ an\ integer;\ otherwise,\ return\ false.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00073}00073\ \textcolor{comment}{\ \ \ \ \ *\ @param\ take\ a\ std::string\ referance\ which\ is\ a\ user\ input.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00074}00074\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00075}00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_sudoku_a2a81308d5a9e91c2f44cdd61d5096344}{analys}}(std::string\ \&);}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00077}00077\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00078}00078\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Chech\ if\ it\ is\ legally\ allowed\ to\ place\ a\ specific\ value\ is\ a\ given\ cell}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00079}00079\ \textcolor{comment}{\ \ \ \ \ *\ validate\ against\ Sudoku\ rules}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00080}00080\ \textcolor{comment}{\ \ \ \ \ *\ @param\ r\ the\ row\ index}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00081}00081\ \textcolor{comment}{\ \ \ \ \ *\ @param\ c\ the\ column\ index}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00082}00082\ \textcolor{comment}{\ \ \ \ \ *\ @param\ str\ is\ the\ valaue\ to\ chech,\ passed\ as\ a\ qString\ (from\ QLineEdit).}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00083}00083\ \textcolor{comment}{\ \ \ \ \ *\ @return\ true\ if\ the\ the\ move\ is\ legal\ and\ false\ if\ it\ violates\ Sudoku\ sules.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00084}00084\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00085}00085\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_sudoku_a35f983dd9e80241653c6aa982cae7805}{isSafe}}(\ \textcolor{keywordtype}{int}\ r,\ \textcolor{keywordtype}{int}\ c\ ,\textcolor{keyword}{const}\ QString\ \&str);}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00087}00087\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00088}00088\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ clear\ the\ current\ board\ and\ generate\ a\ brand\ new\ Sudolu\ puzzle.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00089}00089\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00090}00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_sudoku_aea249f116e2a3ea6427860e47e7931d1}{generateNewGame}}();}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00092}00092\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00093}00093\ \textcolor{comment}{\ \ \ \ \ *\ @berif\ chech\ if\ the\ entire\ 9x9\ grid\ is\ filled\ correctly}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00094}00094\ \textcolor{comment}{\ \ \ \ \ *\ @return\ true\ if\ the\ board\ is\ complete\ and\ false\ if\ not.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00095}00095\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00096}00096\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{class_sudoku_afcff53877ea9cc5fa057cd2b94820fe1}{complete}}();}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00099}00099\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00100}00100\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ auto\ complete\ the\ board.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00101}00101\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00102}00102\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_sudoku_aceae5886cf318324aed196bdd4f28869}{completeTheBoard}}(\textcolor{keywordtype}{int}\ row,\ \textcolor{keywordtype}{int}\ col);}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00104}00104\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00105}00105\ \textcolor{comment}{\ \ \ \ \ *\ @berif\ genarate\ random\ numbers}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00106}00106\ \textcolor{comment}{\ \ \ \ \ *\ @returnan\ integer.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00107}00107\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00108}00108\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{class_sudoku_a925804e062e1b7ed20f05ece41924dcb}{random}}();}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00109}\doxymbox{\hyperlink{class_sudoku_a53774921201e8229814da6bb13b5a217}{00109}}\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{class_sudoku_a53774921201e8229814da6bb13b5a217}{CellInputValidator}};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00112}00112\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00114}00114\ \ \ \ \ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00115}00115\ \textcolor{comment}{\ \ \ \ \ *\ @berif\ the\ 9x9\ grid\ of\ text\ input\ fields\ representing\ the\ sudoku\ board}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00116}00116\ \textcolor{comment}{\ \ \ \ \ *\ QLineEdit}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00117}00117\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00118}00118\ \ \ \ \ QLineEdit\ *cell[9][9];}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00120}00120\ \};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00123}00123\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00124}00124\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00125}00125\ \textcolor{comment}{\ *\ @berif\ this\ struct\ is\ used\ to\ create\ a\ vector\ od\ cordinate\ position\ to\ 9x9\ cells.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00126}00126\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00128}00128\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00129}\doxymbox{\hyperlink{structcordinate}{00129}}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structcordinate_a6910e4d64d5d97672a2c171e39a723c9}{cordinate}}\ \{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00130}00130\ \ \ \ \ \textcolor{comment}{//\ the\ row\ index\ of\ the\ cell\ (0-\/8)}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00131}\doxymbox{\hyperlink{structcordinate_a56402df2a5e4605ec0c7fac7d8ee0daa}{00131}}\ \ \ \ \ T\ \doxymbox{\hyperlink{structcordinate_a56402df2a5e4605ec0c7fac7d8ee0daa}{row}};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00132}00132\ \ \ \ \ \textcolor{comment}{//\ the\ column\ index\ if\ cell\ (0-\/8)}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00133}\doxymbox{\hyperlink{structcordinate_a55ff8cefd2079fb8c1bbdbd3b760e473}{00133}}\ \ \ \ \ T\ \doxymbox{\hyperlink{structcordinate_a55ff8cefd2079fb8c1bbdbd3b760e473}{col}};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00135}\doxymbox{\hyperlink{structcordinate_a6910e4d64d5d97672a2c171e39a723c9}{00135}}\ \ \ \ \ \doxymbox{\hyperlink{structcordinate_a6910e4d64d5d97672a2c171e39a723c9}{cordinate}}(T\ r\ =\ 0,\ T\ c\ =\ 0):\ \doxymbox{\hyperlink{structcordinate_a56402df2a5e4605ec0c7fac7d8ee0daa}{row}}(r),\ \doxymbox{\hyperlink{structcordinate_a55ff8cefd2079fb8c1bbdbd3b760e473}{col}}(c)\{\}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00136}00136\ \};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00138}00138\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00139}00139\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00140}00140\ \textcolor{comment}{\ *\ @berif\ functor\ that\ evaluate\ a\ char\ wether\ it\ is\ a\ string\ och\ intger.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00141}00141\ \textcolor{comment}{\ *\ @param\ c\ is\ a\ char\ and\ user\ input.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00142}00142\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00143}\doxymbox{\hyperlink{structis_digit_functor}{00143}}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{structis_digit_functor}{isDigitFunctor}}\{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00144}\doxymbox{\hyperlink{structis_digit_functor_ad55202b2835b018d80537eabb844f790}{00144}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structis_digit_functor_ad55202b2835b018d80537eabb844f790}{operator()}}(\textcolor{keywordtype}{char}\ c)\{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::isdigit(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{char}\textcolor{keyword}{>}(c));}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00146}00146\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00147}00147\ \};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00148}00148\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00149}00149\ \textcolor{comment}{/*}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00150}00150\ \textcolor{comment}{\ *@brief\ functor\ that\ evaluate\ the\ user\ input.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00151}00151\ \textcolor{comment}{\ *@param\ userInput\ is\ a\ QString\ referance.}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00152}00152\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00153}\doxymbox{\hyperlink{struct_cell_input_validator}{00153}}\ \textcolor{keyword}{struct\ }\doxymbox{\hyperlink{struct_cell_input_validator_ab8eb97b73c8f19797fc58f69a1957e4e}{CellInputValidator}}\ \{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00154}\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{00154}}\ \ \ \ \ \doxymbox{\hyperlink{class_sudoku}{Sudoku}}*\ \doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}};\ \textcolor{comment}{//\ Pointer\ to\ the\ main\ game\ board}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00155}\doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{00155}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00156}\doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{00156}}\ \ \ \ \ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00157}00157\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00158}\doxymbox{\hyperlink{struct_cell_input_validator_ab8eb97b73c8f19797fc58f69a1957e4e}{00158}}\ \ \ \ \ \doxymbox{\hyperlink{struct_cell_input_validator_ab8eb97b73c8f19797fc58f69a1957e4e}{CellInputValidator}}(\doxymbox{\hyperlink{class_sudoku}{Sudoku}}*\ g,\ \textcolor{keywordtype}{int}\ r,\ \textcolor{keywordtype}{int}\ c):\ \doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}(g),\ \doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}}(r),\ \doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}}(c)\{\};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00160}00160\ \ \ \ \ \textcolor{comment}{//\ This\ makes\ the\ object\ callable\ by\ the\ Qt\ signal}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00161}\doxymbox{\hyperlink{struct_cell_input_validator_a3d1cbe88eaee80e6f7bf8a297323ef51}{00161}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{struct_cell_input_validator_a3d1cbe88eaee80e6f7bf8a297323ef51}{operator()}}(\textcolor{keyword}{const}\ QString\ \&userinput)\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (userinput.isEmpty())\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00165}00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ input\ =\ userinput.toStdString();}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>analys(input))\{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00168}00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}it\ is\ invalid\ input:\ it\ has\ to\ be\ an\ integer:\ "{}});}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00170}00170\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>isSafe(\doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}},\ \doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}},\ userinput))\ \{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::logic\_error(\textcolor{stringliteral}{"{}invalid\ move\ chose\ another\ number:"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>complete())\ \{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QMessageBox::information(\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}},\ \textcolor{stringliteral}{"{}Winner!"{}},\ \textcolor{stringliteral}{"{}\ Congratulations,\ you\ completed\ the\ game!"{}});}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00178}00178\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00182}00182\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::invalid\_argument\&\ e)\ \{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ QString\ errorMessage\ =\ QString(\textcolor{stringliteral}{"{}<b>"{}})\ +\ e.what()\ +\ \textcolor{stringliteral}{"{}</b>"{}};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ QMessageBox::information(\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}},\ \textcolor{stringliteral}{"{}game\ over"{}},errorMessage);}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>cell[\doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}}][\doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}}]-\/>clear();}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00186}00186\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00187}00187\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00188}00188\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{catch}(std::logic\_error\&\ e)\{}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ QString\ errorMessage\ =\ QString(\textcolor{stringliteral}{"{}<b>"{}})\ +\ e.what()\ +\ \textcolor{stringliteral}{"{}</b>"{}};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ QMessageBox::information(\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}},\ \textcolor{stringliteral}{"{}try\ again"{}},\ errorMessage);}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>cell[\doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}}][\doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}}]-\/>clear();}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00192}00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00193}00193\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00194}00194\ \};}
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{mainwindows_8h_source_l00196}00196\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ MAINWINDOWS\_H}}
+
+\end{DoxyCode}

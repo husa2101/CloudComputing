@@ -1,0 +1,9 @@
+/home/adam/Desktop/MainWindows-20261019T080748Z-1-001/MainWindows/build/CMakeFiles/MainWindows.dir
+/home/adam/Desktop/MainWindows-20261019T080748Z-1-001/MainWindows/build/CMakeFiles/edit_cache.dir
+/home/adam/Desktop/MainWindows-20261019T080748Z-1-001/MainWindows/build/CMakeFiles/rebuild_cache.dir
+/home/adam/Desktop/MainWindows-20261019T080748Z-1-001/MainWindows/build/CMakeFiles/list_install_components.dir
+/home/adam/Desktop/MainWindows-20261019T080748Z-1-001/MainWindows/build/CMakeFiles/install.dir
+/home/adam/Desktop/MainWindows-20261019T080748Z-1-001/MainWindows/build/CMakeFiles/install/local.dir
+/home/adam/Desktop/MainWindows-20261019T080748Z-1-001/MainWindows/build/CMakeFiles/install/strip.dir
+/home/adam/Desktop/MainWindows-20261019T080748Z-1-001/MainWindows/build/CMakeFiles/MainWindows_autogen_timestamp_deps.dir
+/home/adam/Desktop/MainWindows-20261019T080748Z-1-001/MainWindows/build/CMakeFiles/MainWindows_autogen.dir

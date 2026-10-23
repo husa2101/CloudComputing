@@ -1,0 +1,143 @@
+# ==========================================
+# 1. SHARED CONFIGURATION (ConfigMap)
+# ==========================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sudoku-config
+data:
+  # Variables expected by the PostgreSQL image
+  POSTGRES_USER: sudoku_user
+  POSTGRES_PASSWORD: secretpassword
+  POSTGRES_DB: sudokudb
+  
+  # Variables expected by your Node.js backend
+  DB_HOST: db
+  DB_USER: sudoku_user
+  DB_PASS: secretpassword
+  DB_NAME: sudokudb
+
+---
+# ==========================================
+# 2. DATABASE TIER (StatefulSet)
+# ==========================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: db
+spec:
+  selector:
+    app: db
+  ports:
+    - port: 5432
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: db
+spec:
+  serviceName: "db"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15
+        envFrom:
+        - configMapRef:
+            name: sudoku-config
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - name: db-data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: db-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
+---
+# ==========================================
+# 3. BACKEND TIER (Deployment)
+# ==========================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 3000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: qt-backend:latest
+        imagePullPolicy: Never
+        envFrom:
+        - configMapRef:
+            name: sudoku-config
+        ports:
+        - containerPort: 3000
+
+---
+# ==========================================
+# 4. FRONTEND TIER (Deployment)
+# ==========================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: qt-sudoku
+spec:
+  type: LoadBalancer
+  sessionAffinity: ClientIP
+  selector:
+    app: qt-sudoku
+  ports:
+    - port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qt-sudoku
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: qt-sudoku
+  template:
+    metadata:
+      labels:
+        app: qt-sudoku
+    spec:
+      containers:
+      - name: qt-sudoku
+        image: qt-sudoku:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8080

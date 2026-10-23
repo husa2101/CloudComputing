@@ -1,0 +1,141 @@
+\doxysection{Cell\+Input\+Validator Struct Reference}
+\hypertarget{struct_cell_input_validator}{}\label{struct_cell_input_validator}\index{CellInputValidator@{CellInputValidator}}
+
+
+{\ttfamily \+\#include $<$mainwindows.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_cell_input_validator_ab8eb97b73c8f19797fc58f69a1957e4e}{Cell\+Input\+Validator}} (\doxymbox{\hyperlink{class_sudoku}{Sudoku}} \texorpdfstring{$\ast$}{*}g, int r, int c)
+\item 
+void \doxymbox{\hyperlink{struct_cell_input_validator_a3d1cbe88eaee80e6f7bf8a297323ef51}{operator()}} (const QString \&userinput) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_sudoku}{Sudoku}} \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}
+\item 
+int \doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}}
+\item 
+int \doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8h_source_l00153}{153}} of file \doxymbox{\hyperlink{mainwindows_8h_source}{mainwindows.\+h}}.
+
+
+
+\label{struct_cell_input_validator_doc-constructors}
+\Hypertarget{struct_cell_input_validator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_cell_input_validator_ab8eb97b73c8f19797fc58f69a1957e4e}\index{CellInputValidator@{CellInputValidator}!CellInputValidator@{CellInputValidator}}
+\index{CellInputValidator@{CellInputValidator}!CellInputValidator@{CellInputValidator}}
+\doxysubsubsection{\texorpdfstring{CellInputValidator()}{CellInputValidator()}}
+{\footnotesize\ttfamily \label{struct_cell_input_validator_ab8eb97b73c8f19797fc58f69a1957e4e} 
+Cell\+Input\+Validator::\+\+Cell\+Input\+Validator (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{class_sudoku}{Sudoku}} \texorpdfstring{$\ast$}{*}}]{g}{, }\item[{int}]{r}{, }\item[{int}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8h_source_l00158}{158}} of file \doxymbox{\hyperlink{mainwindows_8h_source}{mainwindows.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00158\ :\ \doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}(g),\ \doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}}(r),\ \doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}}(c)\{\};}
+
+\end{DoxyCode}
+
+
+\label{struct_cell_input_validator_doc-func-members}
+\Hypertarget{struct_cell_input_validator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_cell_input_validator_a3d1cbe88eaee80e6f7bf8a297323ef51}\index{CellInputValidator@{CellInputValidator}!operator()@{operator()}}
+\index{operator()@{operator()}!CellInputValidator@{CellInputValidator}}
+\doxysubsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily \label{struct_cell_input_validator_a3d1cbe88eaee80e6f7bf8a297323ef51} 
+void Cell\+Input\+Validator::\+operator() (\begin{DoxyParamCaption}\item[{const QString \&}]{userinput}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8h_source_l00161}{161}} of file \doxymbox{\hyperlink{mainwindows_8h_source}{mainwindows.\+h}}.
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (userinput.isEmpty())\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}\ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ input\ =\ userinput.toStdString();}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(!\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>analys(input))\{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}it\ is\ invalid\ input:\ it\ has\ to\ be\ an\ integer:\ "{}});}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>isSafe(\doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}},\ \doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}},\ userinput))\ \{}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::logic\_error(\textcolor{stringliteral}{"{}invalid\ move\ chose\ another\ number:"{}});}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>complete())\ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ QMessageBox::information(\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}},\ \textcolor{stringliteral}{"{}Winner!"{}},\ \textcolor{stringliteral}{"{}\ Congratulations,\ you\ completed\ the\ game!"{}});}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \}\ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::invalid\_argument\&\ e)\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ QString\ errorMessage\ =\ QString(\textcolor{stringliteral}{"{}<b>"{}})\ +\ e.what()\ +\ \textcolor{stringliteral}{"{}</b>"{}};}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ QMessageBox::information(\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}},\ \textcolor{stringliteral}{"{}game\ over"{}},errorMessage);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>cell[\doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}}][\doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}}]-\/>clear();}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \}\textcolor{keywordflow}{catch}(std::logic\_error\&\ e)\{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ QString\ errorMessage\ =\ QString(\textcolor{stringliteral}{"{}<b>"{}})\ +\ e.what()\ +\ \textcolor{stringliteral}{"{}</b>"{}};}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ QMessageBox::information(\doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}},\ \textcolor{stringliteral}{"{}try\ again"{}},\ errorMessage);}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}{board}}-\/>cell[\doxymbox{\hyperlink{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}{row}}][\doxymbox{\hyperlink{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}{col}}]-\/>clear();}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+\label{struct_cell_input_validator_doc-variable-members}
+\Hypertarget{struct_cell_input_validator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b}\index{CellInputValidator@{CellInputValidator}!board@{board}}
+\index{board@{board}!CellInputValidator@{CellInputValidator}}
+\doxysubsubsection{\texorpdfstring{board}{board}}
+{\footnotesize\ttfamily \label{struct_cell_input_validator_a59ffd68736ce1f913aaf0bd09e67284b} 
+\doxymbox{\hyperlink{class_sudoku}{Sudoku}}\texorpdfstring{$\ast$}{*} Cell\+Input\+Validator::\+board}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8h_source_l00154}{154}} of file \doxymbox{\hyperlink{mainwindows_8h_source}{mainwindows.\+h}}.
+
+\Hypertarget{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486}\index{CellInputValidator@{CellInputValidator}!col@{col}}
+\index{col@{col}!CellInputValidator@{CellInputValidator}}
+\doxysubsubsection{\texorpdfstring{col}{col}}
+{\footnotesize\ttfamily \label{struct_cell_input_validator_ad9ace5f82c2c5c95f51699d8e8ad1486} 
+int Cell\+Input\+Validator::\+col}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8h_source_l00156}{156}} of file \doxymbox{\hyperlink{mainwindows_8h_source}{mainwindows.\+h}}.
+
+\Hypertarget{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905}\index{CellInputValidator@{CellInputValidator}!row@{row}}
+\index{row@{row}!CellInputValidator@{CellInputValidator}}
+\doxysubsubsection{\texorpdfstring{row}{row}}
+{\footnotesize\ttfamily \label{struct_cell_input_validator_a9fed51de79d5020c7d779b38c00fa905} 
+int Cell\+Input\+Validator::\+row}
+
+
+
+Definition at line \doxymbox{\hyperlink{mainwindows_8h_source_l00155}{155}} of file \doxymbox{\hyperlink{mainwindows_8h_source}{mainwindows.\+h}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{mainwindows_8h}{mainwindows.\+h}}\end{DoxyCompactItemize}
