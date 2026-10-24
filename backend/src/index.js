@@ -9,7 +9,7 @@ const port = 3000;
 app.use(bodyParser.json());
 
 // Database connection setup
-// These use environment variables set by docker-compose, with fallbacks for local testing
+// These use environment variables
 const pool = new Pool({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'sudoku_user',
