@@ -135,6 +135,6 @@ spec:
       containers:
       - name: qt-sudoku
         image: qt-sudoku:latest
-        imagePullPolicy: Never
+         # imagePullPolicy: Never // this can be omited since we have upploaded the image into the docker hub, this was initially included to instruct kubenetes not to try to pull upp the image from docker hub
         ports:
         - containerPort: 8080
