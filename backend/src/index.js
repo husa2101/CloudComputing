@@ -5,16 +5,15 @@ const { Pool } = require('pg');
 const app = express();
 const port = 3000;
 
-// Middleware to parse incoming JSON from Qt
+
 app.use(bodyParser.json());
 
-// Database connection setup
 // These use environment variables
 const pool = new Pool({
-    host: process.env.DB_HOST || 'localhost',
-    user: process.env.DB_USER || 'sudoku_user',
-    password: process.env.DB_PASS || 'secretpassword',
-    database: process.env.DB_NAME || 'sudokudb',
+    host: process.env.DB_HOST 
+    user: process.env.DB_USER 
+    password: process.env.DB_PASS 
+    database: process.env.DB_NAME 
     port: 5432,
 });
 
