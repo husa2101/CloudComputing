@@ -26,7 +26,7 @@ stringData:
   DB_PASS: secretpassword
 ---
 
-# 3. DATABASE TIER (StatefulSet)
+# 3. DATABASE  (StatefulSet)
 apiVersion: v1
 kind: Service
 metadata:
@@ -84,7 +84,7 @@ spec:
           storage: 1Gi
 ---
 
-# 4. BACKEND TIER (Deployment)
+# 4. BACKEND  (Deployment)
 apiVersion: v1
 kind: Service
 metadata:
@@ -122,7 +122,7 @@ spec:
         - containerPort: 3000
 ---
 
-# 5. FRONTEND TIER (Deployment)
+# 5. FRONTEND  (Deployment)
 apiVersion: v1
 kind: Service
 metadata:
