@@ -1,4 +1,4 @@
-# SHARED CONFIGURATION (ConfigMap)
+# 1. SHARED CONFIGURATION (ConfigMap)
 
 apiVersion: v1
 kind: ConfigMap
@@ -7,19 +7,26 @@ metadata:
 data:
   # Variables expected by the PostgreSQL image
   POSTGRES_USER: sudoku_user
-  POSTGRES_PASSWORD: secretpassword
   POSTGRES_DB: sudokudb
   
   # Variables expected by your Node.js backend
   DB_HOST: db
   DB_USER: sudoku_user
-  DB_PASS: secretpassword
   DB_NAME: sudokudb
-
 ---
 
-# DATABASE  (StatefulSet)
+# 1.5 shared configuration (secure)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: sudoku-secrets
+type: Opaque
+stringData:
+  POSTGRES_PASSWORD: secretpassword
+  DB_PASS: secretpassword
+---
 
+# 2. DATABASE TIER (StatefulSet)
 apiVersion: v1
 kind: Service
 metadata:
@@ -29,6 +36,7 @@ spec:
     app: db
   ports:
     - port: 5432
+      targetPort: 5432
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -50,9 +58,19 @@ spec:
         image: postgres:15
         envFrom:
         - configMapRef:
-            name: sudoku-config
+             name: sudoku-config
+        - secretRef:
+            name: sudoku-secrets
+        #  chking connection status it s equivalent to the one we use in mangodb
+        readinessProbe:
+          exec:
+            command: ["pg_isready", "-U", "postgres"]
+          initialDelaySeconds: 5
+          periodSeconds: 10
+
         ports:
         - containerPort: 5432
+
         volumeMounts:
         - name: db-data
           mountPath: /var/lib/postgresql/data
@@ -64,10 +82,9 @@ spec:
       resources:
         requests:
           storage: 1Gi
-
 ---
-# BACKEND  (Deployment)
 
+# 3. BACKEND TIER (Deployment)
 apiVersion: v1
 kind: Service
 metadata:
@@ -89,22 +106,23 @@ spec:
       app: backend
   template:
     metadata:
-      labels:
-        app: backend
+      labels:       
+         app: backend
     spec:
       containers:
       - name: backend
-        image: qt-backend:latest
-        imagePullPolicy: Never
+        image: adam987456/qt-backend:latest
+        imagePullPolicy: Always
         envFrom:
         - configMapRef:
             name: sudoku-config
+        - secretRef:
+            name: sudoku-secrets
         ports:
         - containerPort: 3000
-
 ---
-#  FRONTEND  (Deployment)
 
+# 4. FRONTEND TIER (Deployment)
 apiVersion: v1
 kind: Service
 metadata:
@@ -115,8 +133,10 @@ spec:
   selector:
     app: qt-sudoku
   ports:
-    - port: 8080
+    - name: http
+      port: 8080
       targetPort: 8080
+      protocol: TCP
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -134,7 +154,7 @@ spec:
     spec:
       containers:
       - name: qt-sudoku
-        image: qt-sudoku:latest
-         # imagePullPolicy: Never // this can be omited since we have upploaded the image into the docker hub, this was initially included to instruct kubenetes not to try to pull upp the image from docker hub
+        image: adam987456/qt-sudoku:latest
+        imagePullPolicy: Always  
         ports:
         - containerPort: 8080
