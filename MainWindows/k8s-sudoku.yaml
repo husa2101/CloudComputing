@@ -15,7 +15,7 @@ data:
   DB_NAME: sudokudb
 ---
 
-# 2 shared configuration (secret)
+# 2 SHARED CONFIGURATION (secret)
 apiVersion: v1
 kind: Secret
 metadata:
